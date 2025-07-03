@@ -18,7 +18,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public void register(RegisterDTO dto) {
-        if (userRepository.existsByname(dto.name())) {
+        if (userRepository.existsByName(dto.name())) {
             throw new RuntimeException("Esse usuario já existe");
         }
         String passwordencrypted = passwordEncoder.encode(dto.password());

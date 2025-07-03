@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String name;
     @Column(nullable = false)
     private String password;
-    private Set<Role> roles;
+    private Role roles;
 
 
     @Override
