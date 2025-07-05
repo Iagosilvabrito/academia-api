@@ -12,12 +12,4 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User userProfile(){
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }
 }
