@@ -18,9 +18,9 @@ public class TokenService {
     public String generateToken(User user){
         Algorithm algorithm = Algorithm.HMAC256(secret);
         return JWT.create()
-                .withSubject(user.getName())
+                .withSubject(user.getUsername())
                 .withClaim("UserId", user.getId())
-                .withClaim("UserName", user.getName())
+                .withClaim("UserName", user.getUsername())
                 .withExpiresAt(Instant.now().plusSeconds(86400))
                 .withIssuedAt(Instant.now())
                 .withIssuer("API-ACADEMIA")
@@ -40,7 +40,7 @@ public class TokenService {
             return Optional.of(JWTUserData.
                     builder()
                     .id(jwt.getClaim("UserId").asLong())
-                    .name(jwt.getClaim("name").asString())
+                    .username(jwt.getClaim("username").asString())
                     .build());
 
         }catch (JWTVerificationException e){

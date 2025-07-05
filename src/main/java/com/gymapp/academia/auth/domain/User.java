@@ -7,12 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
-
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -27,7 +24,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Long id;
     @Column(nullable = false, unique = true)
-    private String name;
+    private String username;
     @Column(nullable = false)
     private String password;
     private Role roles;
@@ -36,11 +33,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     @Override

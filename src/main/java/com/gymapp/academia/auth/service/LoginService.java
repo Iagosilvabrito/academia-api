@@ -19,7 +19,7 @@ public class LoginService {
 
     public String login(LoginDTO request) {
         UsernamePasswordAuthenticationToken userAndPassword =
-                new UsernamePasswordAuthenticationToken(request.name(), request.password());
+                new UsernamePasswordAuthenticationToken(request.username(), request.password());
 
         Authentication authentication = authenticationManager.authenticate(userAndPassword);
 

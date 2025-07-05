@@ -1,19 +1,27 @@
 package com.gymapp.academia.auth.mapper;
 
+import com.gymapp.academia.auth.domain.Role;
 import com.gymapp.academia.auth.domain.User;
-import com.gymapp.academia.auth.dto.RegisterDTO;
+import com.gymapp.academia.auth.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class UserMapper {
 
-    public static User toEntity(RegisterDTO dto, String passwordencrypted){
+    public static User toEntity(String username, String passwordencrypted){
         User user = new User();
-        user.setName(dto.name());
+        user.setUsername(username);
         user.setPassword(passwordencrypted);
-        user.setRoles(dto.roles());
-        return  user;
+        user.setRoles(Role.ALUNO);
+        return user;
     }
 
+    public static UserDTO toDTO(User user){
+        return new UserDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getRoles()
+                );
+    }
 }

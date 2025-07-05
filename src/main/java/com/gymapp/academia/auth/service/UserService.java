@@ -1,28 +1,23 @@
 package com.gymapp.academia.auth.service;
 
 import com.gymapp.academia.auth.domain.User;
-import com.gymapp.academia.auth.dto.RegisterDTO;
-import com.gymapp.academia.auth.mapper.UserMapper;
 import com.gymapp.academia.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserMapper userMapper;
 
-    public void register(RegisterDTO dto) {
-        if (userRepository.existsByName(dto.name())) {
-            throw new RuntimeException("Esse usuario já existe");
-        }
-        String passwordencrypted = passwordEncoder.encode(dto.password());
-        User user = UserMapper.toEntity(dto, passwordencrypted);
-        userRepository.save(user);
+    public User userProfile(){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
