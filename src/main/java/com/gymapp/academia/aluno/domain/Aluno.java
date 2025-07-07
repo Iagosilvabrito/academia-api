@@ -1,5 +1,6 @@
-package com.gymapp.academia.auth.domain;
+package com.gymapp.academia.aluno.domain;
 
+import com.gymapp.academia.auth.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

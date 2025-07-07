@@ -1,5 +1,7 @@
 package com.gymapp.academia.config;
 
+import com.gymapp.academia.auth.domain.User;
+import com.gymapp.academia.auth.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +21,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private UserRepository userRepository;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader("Authorization");
@@ -27,11 +31,16 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (Strings.isNotEmpty(authorizationHeader) && authorizationHeader.startsWith("Bearer ")) {
             String token = authorizationHeader.substring("Bearer ".length());
 
-            Optional<JWTUserData> optJWTUserData = tokenService.verifyToken(token);
-            if (optJWTUserData.isPresent()){
-                JWTUserData userData = optJWTUserData.get();
+            Optional<String> optJWTUserData = tokenService.verifyToken(token);
 
-                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userData,null,null);
+            if (optJWTUserData.isPresent()){
+                String username = optJWTUserData.get();
+
+                User user = userRepository.findByUsername(username)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+                UsernamePasswordAuthenticationToken authenticationToken =
+                        new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
             filterChain.doFilter(request, response);

@@ -1,7 +1,7 @@
 package com.gymapp.academia.aluno.mapper;
 
 import com.gymapp.academia.aluno.dto.AlunoUpdateDTO;
-import com.gymapp.academia.auth.domain.Aluno;
+import com.gymapp.academia.aluno.domain.Aluno;
 import com.gymapp.academia.auth.domain.User;
 import com.gymapp.academia.aluno.dto.AlunoResponseDTO;
 import com.gymapp.academia.auth.dto.RegisterAlunoDTO;

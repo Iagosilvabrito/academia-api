@@ -1,12 +1,13 @@
-package com.gymapp.academia.auth.domain;
+package com.gymapp.academia.treino.domain;
 
+import com.gymapp.academia.aluno.domain.Aluno;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -19,7 +20,13 @@ public class Treino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "treino", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Exercicio> exercicios;
+    private String name;
+    private String description;
+    private LocalDate dataCriacao;
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    private Aluno aluno;
+
+
 
 }

@@ -1,6 +1,6 @@
-package com.gymapp.academia.auth.repository;
+package com.gymapp.academia.aluno.repository;
 
-import com.gymapp.academia.auth.domain.Aluno;
+import com.gymapp.academia.aluno.domain.Aluno;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

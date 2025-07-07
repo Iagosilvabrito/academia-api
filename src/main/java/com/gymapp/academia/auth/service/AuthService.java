@@ -1,10 +1,10 @@
 package com.gymapp.academia.auth.service;
-import com.gymapp.academia.auth.domain.Aluno;
+import com.gymapp.academia.aluno.domain.Aluno;
 import com.gymapp.academia.auth.domain.User;
 import com.gymapp.academia.auth.dto.RegisterAlunoDTO;
 import com.gymapp.academia.aluno.mapper.AlunoMapper;
 import com.gymapp.academia.auth.mapper.UserMapper;
-import com.gymapp.academia.auth.repository.AlunoRepository;
+import com.gymapp.academia.aluno.repository.AlunoRepository;
 import com.gymapp.academia.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

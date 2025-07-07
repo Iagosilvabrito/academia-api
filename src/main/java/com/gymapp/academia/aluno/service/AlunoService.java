@@ -1,8 +1,8 @@
 package com.gymapp.academia.aluno.service;
 import com.gymapp.academia.aluno.dto.AlunoUpdateDTO;
 import com.gymapp.academia.aluno.mapper.AlunoMapper;
-import com.gymapp.academia.auth.domain.Aluno;
-import com.gymapp.academia.auth.repository.AlunoRepository;
+import com.gymapp.academia.aluno.domain.Aluno;
+import com.gymapp.academia.aluno.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,9 +22,8 @@ public class AlunoService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
     public void atualizarPerfil(AlunoUpdateDTO dto) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        Aluno aluno = alunoRepository.findByUserUsername(username)
+        String auth = SecurityContextHolder.getContext().getAuthentication().getName();
+        Aluno aluno = alunoRepository.findByUserUsername(auth)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         AlunoMapper.updateAluno(aluno, dto);

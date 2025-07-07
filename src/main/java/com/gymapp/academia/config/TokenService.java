@@ -20,7 +20,6 @@ public class TokenService {
         return JWT.create()
                 .withSubject(user.getUsername())
                 .withClaim("UserId", user.getId())
-                .withClaim("UserName", user.getUsername())
                 .withExpiresAt(Instant.now().plusSeconds(86400))
                 .withIssuedAt(Instant.now())
                 .withIssuer("API-ACADEMIA")
@@ -28,24 +27,21 @@ public class TokenService {
 
     }
 
-    public Optional<JWTUserData> verifyToken(String token){
-
+    public Optional<String> verifyToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            final DecodedJWT jwt = JWT.require(algorithm)
+            DecodedJWT jwt = JWT.require(algorithm)
                     .build()
                     .verify(token);
 
-            return Optional.of(JWTUserData.
-                    builder()
-                    .id(jwt.getClaim("UserId").asLong())
-                    .username(jwt.getClaim("username").asString())
-                    .build());
+            return Optional.of(jwt.getSubject());
 
-        }catch (JWTVerificationException e){
-            return Optional.empty(); }
-
-
+        } catch (JWTVerificationException e) {
+            return Optional.empty();
+        }
     }
+
+
+
 }
