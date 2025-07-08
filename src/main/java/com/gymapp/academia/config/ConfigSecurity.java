@@ -1,5 +1,6 @@
 package com.gymapp.academia.config;
 
+import com.gymapp.academia.auth.domain.Role;
 import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,7 @@ public class ConfigSecurity {
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.POST,"/academia/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST,"/academia/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"treino/criar").hasRole("PROFESSOR")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
