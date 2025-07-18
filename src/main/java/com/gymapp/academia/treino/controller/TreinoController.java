@@ -24,7 +24,7 @@ public class TreinoController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("lista")
+    @GetMapping("listar")
     public ResponseEntity<List<TreinoResponseDTO>>listar(){
         return ResponseEntity.ok(treinoService.listar());
     }

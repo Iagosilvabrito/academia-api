@@ -1,0 +1,6 @@
+CREATE TABLE treino (
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    aluno_id BIGINT NOT NULL,
+    CONSTRAINT fk_aluno FOREIGN KEY (aluno_id) REFERENCES aluno(id) ON DELETE CASCADE
+);

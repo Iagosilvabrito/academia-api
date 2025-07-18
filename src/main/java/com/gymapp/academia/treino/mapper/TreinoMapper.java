@@ -4,9 +4,10 @@ import com.gymapp.academia.aluno.domain.Aluno;
 import com.gymapp.academia.treino.domain.Treino;
 import com.gymapp.academia.treino.dto.TreinoRequestDTO;
 import com.gymapp.academia.treino.dto.TreinoResponseDTO;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-
+@Component
 public class TreinoMapper {
 
     public static Treino toEntity(TreinoRequestDTO dto, Aluno aluno){

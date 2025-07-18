@@ -5,7 +5,9 @@ import com.gymapp.academia.aluno.domain.Aluno;
 import com.gymapp.academia.auth.domain.User;
 import com.gymapp.academia.aluno.dto.AlunoResponseDTO;
 import com.gymapp.academia.auth.dto.RegisterAlunoDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AlunoMapper {
     public static Aluno toEntity(RegisterAlunoDTO dto, User user){
         Aluno aluno = new Aluno();

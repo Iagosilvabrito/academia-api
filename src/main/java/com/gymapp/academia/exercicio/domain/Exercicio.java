@@ -1,4 +1,4 @@
-package com.gymapp.academia.auth.domain;
+package com.gymapp.academia.exercicio.domain;
 
 import com.gymapp.academia.treino.domain.Treino;
 import jakarta.persistence.*;
@@ -18,10 +18,12 @@ public class Exercicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int serie;
+    private String grupoMuscular;
+    private int series;
     private int repeticoes;
 
     @ManyToOne
     @JoinColumn(name = "treino_id")
     private Treino treino;
+
 }

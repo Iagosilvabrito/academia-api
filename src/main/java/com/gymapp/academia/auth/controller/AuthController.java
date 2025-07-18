@@ -22,7 +22,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?>register(@RequestBody RegisterAlunoDTO request){
        authService.register(request);
-
        return ResponseEntity.ok("Usuario criado com sucesso");
     }
 
